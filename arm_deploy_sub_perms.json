@@ -19,12 +19,6 @@
         "description": "Built-in role to assign"
       }
     },
-    "roleNameGuid": {
-      "type": "string",
-      "metadata": {
-        "description": "The role assignment name"
-      }
-    },
     "subscriptionId": {
       "type": "string",
       "metadata": {
@@ -41,7 +35,7 @@
     {
       "type": "Microsoft.Authorization/roleAssignments",
       "apiVersion": "2020-10-01-preview",
-      "name": "[parameters('roleNameGuid')]",
+      "name": "[guid(parameters('subscriptionId'))]",
       "properties": {
         "roleDefinitionId": "[variables(parameters('builtInRoleType'))]",
         "principalId": "[parameters('principalId')]"
