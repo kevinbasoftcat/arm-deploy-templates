@@ -38,9 +38,6 @@
                     "principalId": {
                         "value": "[parameters('principalId')]"
                     },
-                    "builtInRoleType": {
-                        "value": "Reader"
-                    },
                     "subscriptionIds": {
                         "value": "[parameters('subscriptionIds')]"
                     }
