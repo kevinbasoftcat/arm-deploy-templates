@@ -4,7 +4,7 @@
     "parameters": {
         "principalId": {
             "type": "string",
-            "defaultValue": "1eea7541-1243-413a-bb5e-a75256d381f2",
+            "defaultValue": "e0f7eedc-7499-4f50-8f0e-267ec74ff699",
             "metadata": {
                 "description": "The principal to assign the role to"
             }
@@ -13,7 +13,8 @@
         "subscriptionIds": {
             "type": "array",
             "defaultValue": [
-                "b5daafd9-87e5-4d14-9e0a-7009ef189fb8"
+                "5d4011c8-2533-482b-aab2-7eabc45f1ef1",
+                "36d7aca8-1aa6-4cf3-b692-3f76cf17e1f0"
             ],
             "metadata": {
                 "description": "The susbcription Ids to deploy"
