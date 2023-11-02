@@ -8,17 +8,6 @@
         "description": "The principal to assign the role to"
       }
     },
-    "builtInRoleType": {
-      "type": "string",
-      "allowedValues": [
-        "Owner",
-        "Contributor",
-        "Reader"
-      ],
-      "metadata": {
-        "description": "Built-in role to assign"
-      }
-    },
     "subscriptionIds": {
       "type": "array",
       "metadata": {
