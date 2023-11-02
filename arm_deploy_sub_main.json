@@ -41,7 +41,7 @@
                     "builtInRoleType": {
                         "value": "Reader"
                     },
-                    "subscriptionId": {
+                    "subscriptionIds": {
                         "value": "[parameters('subscriptionIds')]"
                     }
                 }
