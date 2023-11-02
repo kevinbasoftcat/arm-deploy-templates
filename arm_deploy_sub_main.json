@@ -1,0 +1,53 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.1",
+    "parameters": {
+        "principalId": {
+            "type": "string",
+            "defaultValue": "1eea7541-1243-413a-bb5e-a75256d381f2",
+            "metadata": {
+                "description": "The principal to assign the role to"
+            }
+
+        },
+        "subscriptionIds": {
+            "type": "array",
+            "defaultValue": [
+                "b5daafd9-87e5-4d14-9e0a-7009ef189fb8"
+            ],
+            "metadata": {
+                "description": "The susbcription Ids to deploy"
+            }
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2022-09-01",
+            "name": "linkedTemplate",
+            "subscriptionId": "[subscription().subscriptionId]",
+            "location": "uksouth",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/kevinbasoftcat/arm-deploy-templates/main/arm_deploy_sub_perms.json",
+                    "contentVersion": "1.0.0.1"
+                },
+                "parameters": {
+                    "principalId": {
+                        "value": "[parameters('principalId')]"
+                    },
+                    "builtInRoleType": {
+                        "value": "Reader"
+                    },
+                    "subscriptionId": {
+                        "value": "[parameters('subscriptionIds')]"
+                    }
+                }
+            }
+        }
+    ],
+    "outputs": {
+    }
+}
