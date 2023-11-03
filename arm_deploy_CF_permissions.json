@@ -2,11 +2,11 @@
     "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
     "contentVersion": "1.0.0.1",
     "parameters": {
-        "principalId": {
+        "cfReaderPrincipalId": {
             "type": "string",
             "defaultValue": "e0f7eedc-7499-4f50-8f0e-267ec74ff699",
             "metadata": {
-                "description": "The principal to assign the role to"
+                "description": "The Softcat Cloud Fundamentals service principal"
             }
 
         },
@@ -17,7 +17,7 @@
                 "36d7aca8-1aa6-4cf3-b692-3f76cf17e1f0"
             ],
             "metadata": {
-                "description": "The susbcription Ids to deploy"
+                "description": "The susbcription Ids to deploy the permissions to"
             }
         }
     },
@@ -26,7 +26,7 @@
         {
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2022-09-01",
-            "name": "[concat('susbcrptiondeploy-', parameters('subscriptionIds')[copyIndex()])]",
+            "name": "[concat('Softcat.Reader.CF-', parameters('subscriptionIds')[copyIndex()])]",
             "subscriptionId": "[parameters('subscriptionIds')[copyIndex()]]",
             "location": "uksouth",
             "properties": {
@@ -37,9 +37,9 @@
                 },
                 "parameters": {
                     "principalId": {
-                        "value": "[parameters('principalId')]"
+                        "value": "[parameters('cfReaderPrincipalId')]"
                     },
-                    "subscriptionIds": {
+                    "subscriptionId": {
                         "value": "[parameters('subscriptionIds')[copyIndex()]]"
                     }
                 },
@@ -47,7 +47,7 @@
                 }
             },
             "copy": {
-                "name": "linkeddeployment",
+                "name": "subscriptioncopyindexlinkeddeployment",
                 "count": "[length(parameters('subscriptionIds'))]"
             }
         }

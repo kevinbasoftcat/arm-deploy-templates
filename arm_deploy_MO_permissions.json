@@ -1,0 +1,91 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.1",
+    "parameters": {
+        "moReaderPrincipalId": {
+            "type": "string",
+            "defaultValue": "e0f7eedc-7499-4f50-8f0e-267ec74ff699",
+            "metadata": {
+                "description": "The Softcat Manage & Operate reader service principal"
+            }
+
+        },
+        "moContributorPrincipalId": {
+            "type": "string",
+            "defaultValue": "e0f7eedc-7499-4f50-8f0e-267ec74ff699",
+            "metadata": {
+                "description": "The Softcat Manage & Operate contributor service principal"
+            }
+
+        },
+        "subscriptionIds": {
+            "type": "array",
+            "defaultValue": [
+                "5d4011c8-2533-482b-aab2-7eabc45f1ef1",
+                "36d7aca8-1aa6-4cf3-b692-3f76cf17e1f0"
+            ],
+            "metadata": {
+                "description": "The susbcription Ids to deploy the permissions to"
+            }
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2022-09-01",
+            "name": "[concat('Softcat.Reader.MO-', parameters('subscriptionIds')[copyIndex()])]",
+            "subscriptionId": "[parameters('subscriptionIds')[copyIndex()]]",
+            "location": "uksouth",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/kevinbasoftcat/arm-deploy-templates/main/arm_rbac_reader_sub_permissions.json",
+                    "contentVersion": "1.0.0.1"
+                },
+                "parameters": {
+                    "principalId": {
+                        "value": "[parameters('moReaderPrincipalId')]"
+                    },
+                    "subscriptionId": {
+                        "value": "[parameters('subscriptionIds')[copyIndex()]]"
+                    }
+                },
+                "outputs": {
+                }
+            },
+            "copy": {
+                "name": "subscriptioncopyindexlinkeddeployment",
+                "count": "[length(parameters('subscriptionIds'))]"
+            }
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2022-09-01",
+            "name": "[concat('Softcat.Contributor.MO-', parameters('subscriptionIds')[copyIndex()])]",
+            "subscriptionId": "[parameters('subscriptionIds')[copyIndex()]]",
+            "location": "uksouth",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "https://raw.githubusercontent.com/kevinbasoftcat/arm-deploy-templates/main/arm_rbac_contributor_sub_permissions.json",
+                    "contentVersion": "1.0.0.1"
+                },
+                "parameters": {
+                    "principalId": {
+                        "value": "[parameters('moContributorPrincipalId')]"
+                    },
+                    "subscriptionId": {
+                        "value": "[parameters('subscriptionIds')[copyIndex()]]"
+                    }
+                },
+                "outputs": {
+                }
+            },
+            "copy": {
+                "name": "subscriptioncopyindexlinkeddeployment",
+                "count": "[length(parameters('subscriptionIds'))]"
+            }
+        }
+    ]
+}

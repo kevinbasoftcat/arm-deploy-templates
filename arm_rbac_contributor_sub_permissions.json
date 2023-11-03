@@ -8,10 +8,10 @@
         "description": "The principal to assign the role to"
       }
     },
-    "subscriptionIds": {
+    "subscriptionId": {
       "type": "string",
       "metadata": {
-        "description": "The susbcription Ids to deploy permissions to"
+        "description": "The susbcription Id to deploy permissions to"
       }
     }
   },
@@ -20,9 +20,9 @@
     {
       "type": "Microsoft.Authorization/roleAssignments",
       "apiVersion": "2020-10-01-preview",
-      "name": "[guid(parameters('subscriptionIds'))]",
+      "name": "[guid(parameters('subscriptionId'))]",
       "properties": {
-        "roleDefinitionId": "[concat('/subscriptions/', uriComponent(parameters('subscriptionIds')), '/providers/Microsoft.Authorization/roleDefinitions/', 'acdd72a7-3385-48ef-bd42-f606fba81ae7')]",
+        "roleDefinitionId": "[concat('/subscriptions/', uriComponent(parameters('subscriptionId')), '/providers/Microsoft.Authorization/roleDefinitions/', 'b24988ac-6180-42a0-ab88-20f7382dd24c')]",
         "principalId": "[parameters('principalId')]"
       }
     }
