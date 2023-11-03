@@ -26,7 +26,7 @@
         {
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2022-09-01",
-            "name": "linkedTemplate",
+            "name": "[concat('susbcrptiondeploy-', parameters('subscriptionIds')[copyIndex()])]",
             "subscriptionId": "[subscription().subscriptionId]",
             "location": "uksouth",
             "properties": {
@@ -40,15 +40,15 @@
                         "value": "[parameters('principalId')]"
                     },
                     "subscriptionIds": {
-                        "value": "[parameters('subscriptionIds')]"
+                        "value": "[parameters('subscriptionIds')[copyIndex()]]"
                     }
                 },
                 "outputs": {
                 }
             },
             "copy": {
-                "name": "linkDeploymentCopy",
-                "count": "[parameters('subscriptionIds')]"
+                "name": "linkeddeployment",
+                "count": "[length(parameters('subscriptionIds'))]"
             }
         }
     ]
