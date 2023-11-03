@@ -27,7 +27,7 @@
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2022-09-01",
             "name": "[concat('susbcrptiondeploy-', parameters('subscriptionIds')[copyIndex()])]",
-            "subscriptionId": "[subscription().subscriptionId]",
+            "subscriptionId": "[concat('/subscriptions/', parameters('subscriptionIds')[copyIndex()])]",
             "location": "uksouth",
             "properties": {
                 "mode": "Incremental",

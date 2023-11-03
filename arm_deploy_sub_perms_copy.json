@@ -21,7 +21,6 @@
       "type": "Microsoft.Authorization/roleAssignments",
       "apiVersion": "2020-10-01-preview",
       "name": "[guid(parameters('subscriptionIds'))]",
-      "scope": "[concat('/subscriptions/', parameters('subscriptionIds'))]",
       "properties": {
         "roleDefinitionId": "[concat('/subscriptions/', uriComponent(parameters('subscriptionIds')), '/providers/Microsoft.Authorization/roleDefinitions/', 'acdd72a7-3385-48ef-bd42-f606fba81ae7')]",
         "principalId": "[parameters('principalId')]"
