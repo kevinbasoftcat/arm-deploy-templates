@@ -2,7 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
     "contentVersion": "1.0.0.1",
     "parameters": {
-        "moReaderPrincipalId": {
+        "ManagedAzureReaderPrincipalId": {
             "type": "string",
             "defaultValue": "e0f7eedc-7499-4f50-8f0e-267ec74ff699",
             "metadata": {
@@ -10,9 +10,9 @@
             }
 
         },
-        "moContributorPrincipalId": {
+        "ManagedAzureContributorPrincipalId": {
             "type": "string",
-            "defaultValue": "e0f7eedc-7499-4f50-8f0e-267ec74ff699",
+            "defaultValue": "b6e417d8-e849-48dc-a626-4b019fb42296",
             "metadata": {
                 "description": "The Softcat Manage & Operate contributor service principal"
             }
@@ -45,7 +45,7 @@
                 },
                 "parameters": {
                     "principalId": {
-                        "value": "[parameters('moReaderPrincipalId')]"
+                        "value": "[parameters('ManagedAzureReaderPrincipalId')]"
                     },
                     "subscriptionId": {
                         "value": "[parameters('subscriptionIds')[copyIndex()]]"
@@ -73,7 +73,7 @@
                 },
                 "parameters": {
                     "principalId": {
-                        "value": "[parameters('moContributorPrincipalId')]"
+                        "value": "[parameters('ManagedAzureContributorPrincipalId')]"
                     },
                     "subscriptionId": {
                         "value": "[parameters('subscriptionIds')[copyIndex()]]"
