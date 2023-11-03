@@ -32,7 +32,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/kevinbasoftcat/arm-deploy-templates/main/arm_deploy_sub_perms.json",
+                    "uri": "https://raw.githubusercontent.com/kevinbasoftcat/arm-deploy-templates/main/arm_deploy_sub_perms_copy.json",
                     "contentVersion": "1.0.0.1"
                 },
                 "parameters": {
@@ -42,10 +42,14 @@
                     "subscriptionIds": {
                         "value": "[parameters('subscriptionIds')]"
                     }
+                },
+                "outputs": {
                 }
+            },
+            "copy": {
+                "name": "linkDeploymentCopy",
+                "count": "[length(parameters('subscriptionIds'))]"
             }
         }
-    ],
-    "outputs": {
-    }
+    ]
 }
