@@ -9,7 +9,7 @@
       }
     },
     "subscriptionIds": {
-      "type": "array",
+      "type": "string",
       "metadata": {
         "description": "The susbcription Ids to deploy permissions to"
       }
